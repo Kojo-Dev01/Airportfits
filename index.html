@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AirportFits — Land in Style</title>
+  <meta name="description" content="Premium cotton travel wear designed for airport comfort and style. Two-piece hoodie & jogger sets — land in style.">
+  <meta property="og:title" content="AirportFits — Land in Style">
+  <meta property="og:description" content="Premium cotton travel sets. Designed for the journey.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<!-- ================================================================
+     HEADER
+     ================================================================ -->
+<header id="site-header">
+  <nav class="nav-inner">
+    <a class="nav-logo" href="#home">Airport<span>Fits</span></a>
+
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#shop">Shop</a>
+      <a href="#about">About</a>
+    </div>
+
+    <div class="nav-actions">
+      <button class="nav-btn" onclick="navigate('#cart')">
+        Bag
+        <span class="cart-badge" data-cart-count data-count="0">0</span>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- Mobile Menu -->
+<nav class="mobile-menu" id="mobile-menu">
+  <a href="#home">Home</a>
+  <a href="#shop">Shop</a>
+  <a href="#cart">Bag</a>
+  <a href="#about">About</a>
+  <span class="mobile-menu-tagline">Land in Style</span>
+</nav>
+
+<!-- ================================================================
+     TOAST CONTAINER
+     ================================================================ -->
+<div class="toast-container" id="toast-container"></div>
+
+<!-- ================================================================
+     SIZE GUIDE MODAL
+     ================================================================ -->
+<div class="modal-overlay" id="size-guide-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title">Size Guide</h3>
+      <button class="modal-close" onclick="closeSizeGuide()">✕</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:0.78rem; color:var(--muted); margin-bottom:1.5rem;">
+        All measurements are in centimetres. For the best fit, measure yourself and compare to the size chart below.
+      </p>
+      <div class="size-table-tabs">
+        <button class="size-tab active" data-gender="men" onclick="switchSizeTab('men')">Men</button>
+        <button class="size-tab" data-gender="women" onclick="switchSizeTab('women')">Women</button>
+      </div>
+
+      <!-- Men's Size Table -->
+      <div class="size-table-wrap active" id="size-table-men">
+        <table class="size-table">
+          <thead>
+            <tr>
+              <th>Size</th>
+              <th>Chest (cm)</th>
+              <th>Waist (cm)</th>
+              <th>Hip (cm)</th>
+              <th>Inseam (cm)</th>
+              <th>Height (cm)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>XS</td><td>86–91</td><td>71–76</td><td>86–91</td><td>74</td><td>160–168</td></tr>
+            <tr><td>S</td><td>91–96</td><td>76–81</td><td>91–96</td><td>76</td><td>168–173</td></tr>
+            <tr><td>M</td><td>96–101</td><td>81–86</td><td>96–101</td><td>78</td><td>173–178</td></tr>
+            <tr><td>L</td><td>101–107</td><td>86–91</td><td>101–107</td><td>80</td><td>178–183</td></tr>
+            <tr><td>XL</td><td>107–112</td><td>91–96</td><td>107–112</td><td>82</td><td>183–188</td></tr>
+            <tr><td>XXL</td><td>112–119</td><td>96–102</td><td>112–119</td><td>84</td><td>188–193</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:0.72rem; color:var(--muted); margin-top:1rem;">
+          Terminal and Runway sets run true to size. Terminal is a relaxed oversized cut — size down for a more fitted look.
+        </p>
+      </div>
+
+      <!-- Women's Size Table -->
+      <div class="size-table-wrap" id="size-table-women">
+        <table class="size-table">
+          <thead>
+            <tr>
+              <th>Size</th>
+              <th>Bust (cm)</th>
+              <th>Waist (cm)</th>
+              <th>Hip (cm)</th>
+              <th>Inseam (cm)</th>
+              <th>Height (cm)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>XS</td><td>79–84</td><td>61–66</td><td>86–91</td><td>69</td><td>155–163</td></tr>
+            <tr><td>S</td><td>84–89</td><td>66–71</td><td>91–96</td><td>71</td><td>163–168</td></tr>
+            <tr><td>M</td><td>89–94</td><td>71–76</td><td>96–101</td><td>73</td><td>168–173</td></tr>
+            <tr><td>L</td><td>94–99</td><td>76–81</td><td>101–107</td><td>75</td><td>173–178</td></tr>
+            <tr><td>XL</td><td>99–104</td><td>81–86</td><td>107–112</td><td>77</td><td>178–183</td></tr>
+            <tr><td>XXL</td><td>104–111</td><td>86–92</td><td>112–118</td><td>79</td><td>183–188</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:0.72rem; color:var(--muted); margin-top:1rem;">
+          Departure sets feature a cropped hoodie — the hoodie runs slightly short. First Class is an oversized luxury fit — size down for a standard look.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     HOME PAGE
+     ================================================================ -->
+<div id="page-home" class="page">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-media">
+      <img src="./assets/hero-airport.png" alt="AirportFits — Land in Style" fetchpriority="high">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content container">
+      <p class="label-sm hero-eyebrow" style="color:var(--gold);">AirportFits — SS 2025</p>
+      <h1 class="hero-title">Land in<br><em>Style</em></h1>
+      <p class="hero-subtitle">Premium cotton two-piece sets engineered for the journey. Comfort, elevated.</p>
+      <div class="hero-cta-row">
+        <a href="#shop" class="btn btn-primary btn-lg">Shop the Collection</a>
+        <a href="#about" class="btn btn-secondary btn-lg">Our Story</a>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <div class="scroll-arrow"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- Marquee strip -->
+  <div style="background:var(--gold); overflow:hidden; padding:10px 0; white-space:nowrap;">
+    <div style="display:inline-block; animation:marquee 20s linear infinite; font-size:0.62rem; font-weight:600; letter-spacing:0.25em; color:var(--bg); text-transform:uppercase;">
+      &nbsp;&nbsp;&nbsp;Premium Cotton · 320 GSM &nbsp;·&nbsp; Land in Style &nbsp;·&nbsp; Free Shipping Over $200 &nbsp;·&nbsp; Terminal · Runway · Departure · First Class &nbsp;·&nbsp; Premium Cotton · 320 GSM &nbsp;·&nbsp; Land in Style &nbsp;·&nbsp; Free Shipping Over $200 &nbsp;·&nbsp; Terminal · Runway · Departure · First Class &nbsp;·&nbsp; Premium Cotton · 320 GSM &nbsp;·&nbsp;
+    </div>
+    <style>@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }</style>
+  </div>
+
+  <!-- Featured Products -->
+  <section class="section-featured">
+    <div class="container">
+      <div class="section-header split fade-up">
+        <div>
+          <p class="label-sm" style="color:var(--gold); margin-bottom:0.75rem;">The Collection</p>
+          <h2 class="display-md">Featured Pieces</h2>
+        </div>
+        <a href="#shop" class="btn btn-ghost">View All</a>
+      </div>
+      <div class="featured-grid" id="featured-grid">
+        <!-- Populated by JS -->
+        <div class="product-card"><div class="product-card-image skeleton" style="aspect-ratio:3/4"></div></div>
+        <div class="product-card"><div class="product-card-image skeleton" style="aspect-ratio:3/4"></div></div>
+        <div class="product-card"><div class="product-card-image skeleton" style="aspect-ratio:3/4"></div></div>
+        <div class="product-card"><div class="product-card-image skeleton" style="aspect-ratio:3/4"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Brand Story Teaser -->
+  <section class="section-story">
+    <div class="container">
+      <div class="story-grid">
+        <div class="story-image-wrap fade-up">
+          <img src="./assets/hero-airport.png" alt="AirportFits Brand Story" loading="lazy">
+          <div class="story-image-badge">Designed in Dubai</div>
+        </div>
+        <div class="story-text">
+          <p class="label-sm fade-up" style="color:var(--gold); margin-bottom:1rem;">Our Story</p>
+          <h2 class="fade-up delay-1">Born in the <em>terminal,</em><br>built for the journey</h2>
+          <span class="gold-line fade-up delay-2"></span>
+          <p class="fade-up delay-2">AirportFits was born from a simple frustration — arriving at the airport in clothes that were either too casual or too uncomfortable for the journey ahead. We believed travel deserved better.</p>
+          <p class="fade-up delay-3">Our premium 320 GSM cotton two-piece sets are engineered for the modern traveller. From the terminal lounge to your destination, you arrive looking like you meant it.</p>
+          <div class="fade-up delay-4">
+            <a href="#about" class="btn btn-ghost">Read Our Story</a>
+          </div>
+          <div class="story-stats fade-up delay-4">
+            <div class="stat-item">
+              <div class="stat-number">320</div>
+              <div class="stat-label">GSM Cotton Weight</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">16</div>
+              <div class="stat-label">Styles Available</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">100%</div>
+              <div class="stat-label">Premium Cotton</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Grid -->
+  <section style="padding: clamp(60px, 8vh, 100px) 0;">
+    <div class="container">
+      <div class="section-header fade-up" style="margin-bottom:2.5rem; text-align:center;">
+        <p class="label-sm" style="color:var(--gold); margin-bottom:0.75rem;">Shop by Category</p>
+        <h2 class="display-md">Find Your Fit</h2>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:2px; background:var(--border);">
+        <div class="fade-up delay-1" style="position:relative; overflow:hidden; aspect-ratio:4/3; cursor:pointer; background:#0D0D0D;" onclick="setFilter('gender','men'); navigate('#shop');">
+          <img src="./assets/product-black-set.png" alt="Men's Collection" loading="lazy"
+            style="width:100%; height:100%; object-fit:cover; filter:brightness(0.5); transition:transform 0.7s var(--ease-out);"
+            onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+          <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+            <p class="label-sm" style="color:var(--gold); margin-bottom:0.5rem;">Terminal · Runway</p>
+            <h3 style="font-family:var(--font-serif); font-size:clamp(2rem,5vw,4rem); font-weight:300; color:var(--cream);">Men's</h3>
+            <p style="font-size:0.72rem; color:var(--cream-dim); margin-top:0.5rem; letter-spacing:0.1em;">8 Styles</p>
+          </div>
+        </div>
+        <div class="fade-up delay-2" style="position:relative; overflow:hidden; aspect-ratio:4/3; cursor:pointer; background:#0D0D0D;" onclick="setFilter('gender','women'); navigate('#shop');">
+          <img src="./assets/product-pink-set.png" alt="Women's Collection" loading="lazy"
+            style="width:100%; height:100%; object-fit:cover; filter:brightness(0.5); transition:transform 0.7s var(--ease-out);"
+            onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+          <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+            <p class="label-sm" style="color:var(--gold); margin-bottom:0.5rem;">Departure · First Class</p>
+            <h3 style="font-family:var(--font-serif); font-size:clamp(2rem,5vw,4rem); font-weight:300; color:var(--cream);">Women's</h3>
+            <p style="font-size:0.72rem; color:var(--cream-dim); margin-top:0.5rem; letter-spacing:0.1em;">8 Styles</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Perks Banner -->
+  <section style="padding:clamp(40px,6vh,80px) 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+    <div class="container">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:2rem; text-align:center;">
+        <div class="fade-up">
+          <div style="font-size:1.5rem; margin-bottom:0.75rem; color:var(--gold);">✦</div>
+          <div style="font-size:0.68rem; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--cream); margin-bottom:0.4rem;">Premium Cotton</div>
+          <div style="font-size:0.78rem; color:var(--muted);">320 GSM heavyweight fabric</div>
+        </div>
+        <div class="fade-up delay-1">
+          <div style="font-size:1.5rem; margin-bottom:0.75rem; color:var(--gold);">✦</div>
+          <div style="font-size:0.68rem; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--cream); margin-bottom:0.4rem;">Free Shipping</div>
+          <div style="font-size:0.78rem; color:var(--muted);">On all orders over $200</div>
+        </div>
+        <div class="fade-up delay-2">
+          <div style="font-size:1.5rem; margin-bottom:0.75rem; color:var(--gold);">✦</div>
+          <div style="font-size:0.68rem; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--cream); margin-bottom:0.4rem;">Worldwide Delivery</div>
+          <div style="font-size:0.78rem; color:var(--muted);">Standard & express options</div>
+        </div>
+        <div class="fade-up delay-3">
+          <div style="font-size:1.5rem; margin-bottom:0.75rem; color:var(--gold);">✦</div>
+          <div style="font-size:0.68rem; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--cream); margin-bottom:0.4rem;">Easy Returns</div>
+          <div style="font-size:0.78rem; color:var(--muted);">30-day hassle-free returns</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="section-newsletter">
+    <div class="container">
+      <div class="newsletter-inner fade-up">
+        <p class="label-sm" style="color:var(--gold); margin-bottom:0.75rem;">Newsletter</p>
+        <h2>First class inbox</h2>
+        <p>Join our list for early access to new drops, exclusive offers, and style inspiration for the modern traveller.</p>
+        <form class="newsletter-form" id="newsletter-form">
+          <input type="email" placeholder="Your email address" autocomplete="email" required>
+          <button type="submit">Subscribe</button>
+        </form>
+        <div class="newsletter-msg" id="newsletter-msg"></div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /page-home -->
+
+<!-- ================================================================
+     SHOP PAGE
+     ================================================================ -->
+<div id="page-shop" class="page">
+  <div class="container page-shop">
+    <div class="shop-header">
+      <h1 class="fade-up">The Collection</h1>
+      <div class="shop-meta">
+        <span class="product-count" id="product-count">16 Products</span>
+      </div>
+      <div style="margin-top:1.5rem;" id="filter-bar"></div>
+    </div>
+    <div class="products-grid" id="products-grid"></div>
+  </div>
+</div>
+
+<!-- ================================================================
+     PRODUCT DETAIL PAGE
+     ================================================================ -->
+<div id="page-product" class="page">
+  <div class="product-detail-grid">
+
+    <!-- Gallery -->
+    <div class="product-gallery">
+      <img src="./assets/product-black-set.png" alt="Product" id="product-main-img" style="transition:opacity 0.35s ease;">
+      <div class="gallery-thumbs" id="gallery-thumbs"></div>
+    </div>
+
+    <!-- Info -->
+    <div class="product-info">
+      <div class="product-breadcrumb" id="product-breadcrumb"></div>
+
+      <h1 class="product-name" id="product-name">Product Name</h1>
+      <p class="product-tagline" id="product-tagline"></p>
+      <div class="product-price-display" id="product-price">$129</div>
+
+      <div class="product-divider"></div>
+
+      <!-- Color -->
+      <div class="option-label">Color <strong id="selected-color-label"></strong></div>
+      <div class="color-swatches" id="color-swatches"></div>
+
+      <div class="product-divider"></div>
+
+      <!-- Size -->
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.75rem;">
+        <div class="option-label" style="margin-bottom:0;">Size <strong id="selected-size-label"></strong></div>
+        <button class="size-guide-link" onclick="openSizeGuide()">Size Guide</button>
+      </div>
+      <div class="sizes-grid" id="size-buttons"></div>
+
+      <div class="product-divider"></div>
+
+      <!-- Quantity -->
+      <div class="quantity-row">
+        <div class="option-label" style="margin-bottom:0;">Quantity</div>
+        <div class="qty-control">
+          <button class="qty-btn" onclick="changeQty(-1)">−</button>
+          <div class="qty-value" id="qty-value">1</div>
+          <button class="qty-btn" onclick="changeQty(1)">+</button>
+        </div>
+      </div>
+
+      <!-- Add to Bag -->
+      <button class="btn-atb" onclick="addToBag()">Add to Bag</button>
+      <button class="btn btn-secondary" style="width:100%; margin-bottom:2rem;" onclick="navigate('#cart')">View Bag</button>
+
+      <!-- Accordion -->
+      <div class="accordion-item open">
+        <button class="accordion-header" onclick="this.closest('.accordion-item').classList.toggle('open')">
+          <span>Description</span><span class="accordion-icon"></span>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <p>The AirportFits two-piece set is your ultimate travel companion. Crafted from our signature 320 GSM premium cotton, each set delivers the perfect balance of luxury and ease — whether you're boarding a flight or exploring a new city.</p>
+            <p style="margin-top:0.75rem;">The hoodie and matching jogger pants are cut from the same fabric batch for seamless colour consistency, with reinforced stitching at all stress points for lasting wear.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="this.closest('.accordion-item').classList.toggle('open')">
+          <span>Materials & Care</span><span class="accordion-icon"></span>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <ul>
+              <li>100% Premium Heavyweight Cotton</li>
+              <li>320 GSM — substantial, structured feel</li>
+              <li>Pre-shrunk fabric — maintains shape wash after wash</li>
+              <li>Brushed fleece inner lining</li>
+              <li>Machine wash cold, gentle cycle</li>
+              <li>Do not bleach · Tumble dry low</li>
+              <li>Iron on low heat if needed</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="this.closest('.accordion-item').classList.toggle('open')">
+          <span>Shipping & Returns</span><span class="accordion-icon"></span>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <ul>
+              <li><strong style="color:var(--cream);font-weight:400;">Standard Shipping</strong> — $8 · 5–8 business days</li>
+              <li><strong style="color:var(--cream);font-weight:400;">Express Shipping</strong> — $15 · 2–4 business days</li>
+              <li><strong style="color:var(--cream);font-weight:400;">Free Shipping</strong> on orders over $200</li>
+              <li style="margin-top:0.5rem;">Free 30-day returns on unworn items with tags attached</li>
+              <li>Contact us at support@airportfits.com for return authorisation</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div><!-- /product-info -->
+  </div>
+</div><!-- /page-product -->
+
+<!-- ================================================================
+     CART PAGE
+     ================================================================ -->
+<div id="page-cart" class="page">
+  <div class="container page-cart">
+
+    <!-- Empty State -->
+    <div id="cart-empty" class="empty-cart" style="display:none;">
+      <div class="empty-cart-icon">∅</div>
+      <h3>Your bag is empty</h3>
+      <p>Add some pieces to your collection to get started.</p>
+      <a href="#shop" class="btn btn-primary">Shop the Collection</a>
+    </div>
+
+    <!-- Filled Cart -->
+    <div id="cart-filled" style="display:none;">
+      <h1 class="cart-title">Your Bag</h1>
+      <p class="cart-subtitle" id="cart-items-count"></p>
+
+      <div class="cart-layout">
+        <div>
+          <div class="cart-items-header">
+            <span></span>
+            <span>Product</span>
+            <span>Quantity</span>
+            <span style="text-align:right;">Total</span>
+          </div>
+          <div id="cart-items"></div>
+
+          <div style="margin-top:2rem;">
+            <a href="#shop" class="btn btn-secondary">← Continue Shopping</a>
+          </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="cart-summary">
+          <h3 class="cart-summary-title">Order Summary</h3>
+
+          <div class="summary-line">
+            <span>Subtotal</span>
+            <span id="cart-subtotal">$0.00</span>
+          </div>
+          <div class="summary-line">
+            <span>Shipping</span>
+            <span id="cart-shipping">$8.00</span>
+          </div>
+          <div class="summary-line total">
+            <span>Total</span>
+            <span id="cart-total">$0.00</span>
+          </div>
+
+          <p class="summary-shipping-note" id="cart-ship-note">Add $200 for free shipping</p>
+
+          <button class="btn btn-primary" style="width:100%; padding:16px;" onclick="navigate('#checkout')">
+            Proceed to Checkout →
+          </button>
+
+          <div style="margin-top:1.25rem; display:flex; align-items:center; justify-content:center; gap:0.75rem;">
+            <span style="font-size:0.6rem; color:var(--muted); letter-spacing:0.12em; text-transform:uppercase;">Secure Checkout</span>
+            <span style="font-size:0.6rem; color:var(--muted);">·</span>
+            <span style="font-size:0.6rem; color:var(--muted); letter-spacing:0.12em; text-transform:uppercase;">SSL Encrypted</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /page-cart -->
+
+<!-- ================================================================
+     CHECKOUT PAGE
+     ================================================================ -->
+<div id="page-checkout" class="page">
+  <div class="container page-checkout">
+    <h1 class="checkout-title">Checkout</h1>
+
+    <div class="checkout-steps" id="checkout-steps">
+      <!-- Populated by JS -->
+    </div>
+
+    <div class="checkout-layout">
+      <div>
+
+        <!-- Step 1: Contact -->
+        <div class="checkout-section active" id="checkout-step-1">
+          <h3 style="font-family:var(--font-serif); font-size:1.4rem; font-weight:400; margin-bottom:1.5rem;">Contact Information</h3>
+          <div class="form-row full">
+            <div class="form-group">
+              <label class="form-label">Email Address *</label>
+              <input type="email" class="form-input" id="co-email" placeholder="your@email.com" required autocomplete="email">
+            </div>
+          </div>
+          <div class="form-row full">
+            <div class="form-group">
+              <label class="form-label">Phone Number</label>
+              <input type="tel" class="form-input" id="co-phone" placeholder="+1 (555) 000-0000" autocomplete="tel">
+            </div>
+          </div>
+          <div class="checkout-nav">
+            <button class="btn btn-primary btn-lg" onclick="nextCheckoutStep()">Continue to Shipping →</button>
+          </div>
+        </div>
+
+        <!-- Step 2: Shipping Address -->
+        <div class="checkout-section" id="checkout-step-2">
+          <h3 style="font-family:var(--font-serif); font-size:1.4rem; font-weight:400; margin-bottom:1.5rem;">Shipping Address</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">First Name *</label>
+              <input type="text" class="form-input" id="co-firstname" placeholder="James" required autocomplete="given-name">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last Name *</label>
+              <input type="text" class="form-input" id="co-lastname" placeholder="Laurent" required autocomplete="family-name">
+            </div>
+          </div>
+          <div class="form-row full">
+            <div class="form-group">
+              <label class="form-label">Address *</label>
+              <input type="text" class="form-input" id="co-address" placeholder="123 Terminal Drive" required autocomplete="street-address">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">City *</label>
+              <input type="text" class="form-input" id="co-city" placeholder="Dubai" required autocomplete="address-level2">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Postal Code *</label>
+              <input type="text" class="form-input" id="co-postal" placeholder="00000" required autocomplete="postal-code">
+            </div>
+          </div>
+          <div class="form-row full">
+            <div class="form-group">
+              <label class="form-label">Country *</label>
+              <select class="form-select" id="co-country" required autocomplete="country">
+                <option value="">Select Country</option>
+                <option value="AE">United Arab Emirates</option>
+                <option value="US">United States</option>
+                <option value="GB">United Kingdom</option>
+                <option value="CA">Canada</option>
+                <option value="AU">Australia</option>
+                <option value="DE">Germany</option>
+                <option value="FR">France</option>
+                <option value="JP">Japan</option>
+                <option value="SG">Singapore</option>
+                <option value="GH">Ghana</option>
+                <option value="NG">Nigeria</option>
+                <option value="ZA">South Africa</option>
+                <option value="KE">Kenya</option>
+                <option value="SA">Saudi Arabia</option>
+                <option value="QA">Qatar</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="checkout-nav">
+            <button class="btn btn-secondary" onclick="prevCheckoutStep()">← Back</button>
+            <button class="btn btn-primary btn-lg" onclick="nextCheckoutStep()">Continue →</button>
+          </div>
+        </div>
+
+        <!-- Step 3: Shipping Method -->
+        <div class="checkout-section" id="checkout-step-3">
+          <h3 style="font-family:var(--font-serif); font-size:1.4rem; font-weight:400; margin-bottom:1.5rem;">Shipping Method</h3>
+          <div class="shipping-options" id="shipping-options">
+            <!-- Populated by JS -->
+          </div>
+          <div class="checkout-nav">
+            <button class="btn btn-secondary" onclick="prevCheckoutStep()">← Back</button>
+            <button class="btn btn-primary btn-lg" onclick="nextCheckoutStep()">Continue to Payment →</button>
+          </div>
+        </div>
+
+        <!-- Step 4: Payment -->
+        <div class="checkout-section" id="checkout-step-4">
+          <h3 style="font-family:var(--font-serif); font-size:1.4rem; font-weight:400; margin-bottom:0.5rem;">Payment Details</h3>
+          <p style="font-size:0.75rem; color:var(--muted); margin-bottom:1.5rem; letter-spacing:0.04em;">Your payment info is encrypted and secure. This is a demo — no real charges will be made.</p>
+          <div class="form-row full">
+            <div class="form-group">
+              <label class="form-label">Card Number *</label>
+              <div class="card-input-wrap">
+                <input type="text" class="form-input" id="co-card" placeholder="1234 5678 9012 3456" required maxlength="19" autocomplete="cc-number">
+                <div class="card-icons">
+                  <span class="card-chip">VISA</span>
+                  <span class="card-chip">MC</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Expiry Date *</label>
+              <input type="text" class="form-input" id="co-expiry" placeholder="MM/YY" required maxlength="5" autocomplete="cc-exp">
+            </div>
+            <div class="form-group">
+              <label class="form-label">CVV *</label>
+              <input type="text" class="form-input" id="co-cvv" placeholder="123" required maxlength="4" autocomplete="cc-csc">
+            </div>
+          </div>
+          <div class="form-row full">
+            <div class="form-group">
+              <label class="form-label">Name on Card *</label>
+              <input type="text" class="form-input" id="co-cardname" placeholder="JAMES LAURENT" required autocomplete="cc-name">
+            </div>
+          </div>
+
+          <div style="background:var(--bg-card); border:1px solid var(--border); padding:16px; margin-bottom:1.5rem; display:flex; align-items:center; gap:0.75rem;">
+            <span style="color:var(--gold); font-size:1rem;">🔒</span>
+            <p style="font-size:0.72rem; color:var(--muted); line-height:1.5;">256-bit SSL encryption. We never store your full card details. Powered by Stripe-ready infrastructure.</p>
+          </div>
+
+          <!-- Order Total Preview -->
+          <div style="background:var(--bg-card); border:1px solid var(--border); padding:16px; margin-bottom:1.5rem;">
+            <div style="display:flex; justify-content:space-between; font-size:0.82rem; color:var(--cream-dim); margin-bottom:0.5rem;">
+              <span>Subtotal</span><span id="co-subtotal-preview">-</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.82rem; color:var(--cream-dim); margin-bottom:0.75rem;">
+              <span>Shipping</span><span id="co-ship-preview">-</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-family:var(--font-serif); font-size:1.3rem; color:var(--cream); padding-top:0.75rem; border-top:1px solid var(--border);">
+              <span>Total</span><span id="co-total-preview" style="color:var(--gold);">-</span>
+            </div>
+          </div>
+
+          <div class="checkout-nav" style="flex-direction:column;">
+            <button class="btn btn-primary btn-lg" style="width:100%;" id="place-order-btn" onclick="syncPaymentPreview(); placeOrder()">
+              Place Order — Complete Purchase
+            </button>
+            <button class="btn btn-secondary btn-sm" style="margin-top:0.75rem;" onclick="prevCheckoutStep()">← Back</button>
+          </div>
+        </div>
+
+      </div><!-- /checkout form -->
+
+      <!-- Sidebar Summary -->
+      <div class="checkout-summary">
+        <h3 style="font-family:var(--font-serif); font-size:1.1rem; font-weight:400; margin-bottom:1.25rem; padding-bottom:1rem; border-bottom:1px solid var(--border);">
+          Order Summary
+        </h3>
+        <div id="checkout-summary-items" class="checkout-summary-items"></div>
+        <div class="summary-line" style="margin-top:1rem;">
+          <span>Subtotal</span><span id="co-subtotal">-</span>
+        </div>
+        <div class="summary-line">
+          <span>Shipping</span><span id="co-shipping">-</span>
+        </div>
+        <div class="summary-line total">
+          <span>Total</span><span id="co-total">-</span>
+        </div>
+      </div>
+
+    </div><!-- /checkout-layout -->
+  </div>
+</div><!-- /page-checkout -->
+
+<!-- ================================================================
+     ORDER CONFIRMED PAGE
+     ================================================================ -->
+<div id="page-order-confirmed" class="page">
+  <div class="container page-order-confirmed">
+    <div class="confirmed-icon">✓</div>
+    <h1 class="confirmed-title">Order Confirmed</h1>
+    <p class="confirmed-number" id="order-number">Order <strong></strong></p>
+    <p style="font-size:0.85rem; color:var(--cream-dim); max-width:400px; margin:0 auto 2rem; line-height:1.7;">
+      Thank you for your purchase. A confirmation email has been sent to your inbox. Your AirportFits set is on its way.
+    </p>
+    <div class="confirmed-box" id="order-details-box"></div>
+    <div id="order-items"></div>
+    <div style="margin-top:2.5rem;">
+      <a href="#shop" class="btn btn-primary btn-lg">Continue Shopping</a>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     ABOUT PAGE
+     ================================================================ -->
+<div id="page-about" class="page">
+  <div class="page-about">
+
+    <div class="about-hero">
+      <img src="./assets/hero-airport.png" alt="AirportFits — Our Story" loading="lazy">
+      <div style="position:absolute; inset:0; background:rgba(10,10,10,0.4);"></div>
+      <div class="about-hero-content">
+        <p class="label-sm fade-up" style="color:var(--gold); margin-bottom:1rem;">Our Story</p>
+        <h1 class="fade-up delay-1">Born to<br><em style="font-style:italic; color:var(--gold-light);">Fly</em></h1>
+      </div>
+    </div>
+
+    <div class="about-body">
+      <div class="container">
+        <div class="about-content-grid">
+          <div class="about-text">
+            <p class="label-sm fade-up" style="color:var(--gold); margin-bottom:1.25rem;">Dubai, 2023</p>
+            <p class="fade-up delay-1">
+              <strong>AirportFits</strong> was conceived in the terminal of Dubai International Airport — the world's busiest international hub. Our founder, tired of choosing between looking good and being comfortable, decided the choice shouldn't have to be made.
+            </p>
+            <p class="fade-up delay-2">
+              We spent 18 months sourcing the perfect cotton. Not just any cotton — 320 GSM heavyweight premium cotton that has the structure of a luxury garment and the softness of a cloud. Then we cut it into sets that are designed to move with you, whether you're sprinting to a gate or lounging in a first-class lounge.
+            </p>
+            <p class="fade-up delay-3">
+              Each set — from <strong>The Terminal</strong> to <strong>The First Class</strong> — is named after an airport experience, capturing a specific feeling of modern travel. We design for the person who treats every journey as an arrival.
+            </p>
+            <p class="fade-up delay-4">
+              AirportFits is for the globe-trotters, the digital nomads, the weekend warriors. For anyone who believes the journey is as important as the destination — and that you should look the part.
+            </p>
+            <div class="fade-up delay-4" style="margin-top:2rem;">
+              <a href="#shop" class="btn btn-primary">Shop the Collection</a>
+            </div>
+          </div>
+
+          <div class="about-values fade-up delay-2">
+            <div class="value-item">
+              <div class="value-number">01</div>
+              <div class="value-title">Crafted with Intent</div>
+              <div class="value-desc">Every seam, every stitch is placed with purpose. Our 320 GSM cotton is pre-shrunk, colour-fast, and built to outlast your frequent flyer miles.</div>
+            </div>
+            <div class="value-item">
+              <div class="value-number">02</div>
+              <div class="value-title">Designed for Movement</div>
+              <div class="value-desc">Four fit profiles to suit every body type. From relaxed oversized cuts to slim modern silhouettes — you don't have to compromise comfort for style.</div>
+            </div>
+            <div class="value-item">
+              <div class="value-number">03</div>
+              <div class="value-title">Consistent Colour</div>
+              <div class="value-desc">Hoodie and jogger cut from the same fabric batch. No mismatched sets. No fading discrepancy. Just a perfect, cohesive look, every time.</div>
+            </div>
+            <div class="value-item">
+              <div class="value-number">04</div>
+              <div class="value-title">Built to Last</div>
+              <div class="value-desc">Reinforced seams, heavy-duty drawcords, and premium hardware. We design for the long haul — because great travel companions don't expire.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quote -->
+    <div style="padding:clamp(60px,8vh,100px) 0; border-top:1px solid var(--border); text-align:center; background:#0D0D0D;">
+      <div class="container">
+        <span class="gold-line center fade-up"></span>
+        <blockquote class="fade-up delay-1" style="font-family:var(--font-serif); font-size:clamp(1.4rem,3vw,2.5rem); font-weight:300; font-style:italic; line-height:1.4; color:var(--cream); max-width:700px; margin:0 auto 1.5rem;">
+          "The journey is the destination. You should look like you know it."
+        </blockquote>
+        <p class="fade-up delay-2" style="font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted);">— AirportFits</p>
+        <span class="gold-line center fade-up delay-2"></span>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /page-about -->
+
+<!-- ================================================================
+     FOOTER
+     ================================================================ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="nav-logo">Airport<span>Fits</span></span>
+        <p>Premium cotton travel wear designed for airport comfort and style. Land in style, every time.</p>
+        <div style="margin-top:1.25rem; display:flex; gap:1rem;">
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" style="font-size:0.72rem; color:var(--muted); transition:color var(--transition);" onmouseover="this.style.color='var(--cream)'" onmouseout="this.style.color='var(--muted)'">Instagram</a>
+          <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" style="font-size:0.72rem; color:var(--muted); transition:color var(--transition);" onmouseover="this.style.color='var(--cream)'" onmouseout="this.style.color='var(--muted)'">TikTok</a>
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" style="font-size:0.72rem; color:var(--muted); transition:color var(--transition);" onmouseover="this.style.color='var(--cream)'" onmouseout="this.style.color='var(--muted)'">Twitter</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><button onclick="setFilter('gender','men'); navigate('#shop')">Men's Collection</button></li>
+          <li><button onclick="setFilter('gender','women'); navigate('#shop')">Women's Collection</button></li>
+          <li><button onclick="resetFilters(); navigate('#shop')">All Products</button></li>
+          <li><button onclick="openSizeGuide()">Size Guide</button></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="mailto:support@airportfits.com" target="_blank">Contact Us</a></li>
+          <li><button onclick="navigate('#cart')">Track Order</button></li>
+          <li><a href="mailto:returns@airportfits.com" target="_blank">Returns Policy</a></li>
+          <li><a href="mailto:support@airportfits.com" target="_blank">Shipping Info</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><button onclick="navigate('#about')">Our Story</button></li>
+          <li><a href="mailto:press@airportfits.com" target="_blank">Press</a></li>
+          <li><a href="mailto:wholesale@airportfits.com" target="_blank">Wholesale</a></li>
+          <li><a href="mailto:careers@airportfits.com" target="_blank">Careers</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 AirportFits. All rights reserved. Designed in Dubai.</p>
+      <div class="footer-bottom-links">
+        <a href="mailto:privacy@airportfits.com" target="_blank">Privacy Policy</a>
+        <a href="mailto:legal@airportfits.com" target="_blank">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ================================================================
+     SCRIPT
+     ================================================================ -->
+<script src="./app.js"></script>
+<script>
+  // Sync payment preview totals on step 4
+  function syncPaymentPreview() {
+    const sub = document.getElementById('co-subtotal')?.textContent;
+    const ship = document.getElementById('co-shipping')?.textContent;
+    const tot = document.getElementById('co-total')?.textContent;
+    if (document.getElementById('co-subtotal-preview')) document.getElementById('co-subtotal-preview').textContent = sub || '-';
+    if (document.getElementById('co-ship-preview')) document.getElementById('co-ship-preview').textContent = ship || '-';
+    if (document.getElementById('co-total-preview')) document.getElementById('co-total-preview').textContent = tot || '-';
+  }
+</script>
+
+</body>
+</html>
