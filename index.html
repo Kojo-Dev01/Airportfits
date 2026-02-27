@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +7,6 @@
   <meta name="description" content="Premium cotton travel wear designed for airport comfort and style. Two-piece hoodie & jogger sets — land in style.">
   <meta property="og:title" content="AirportFits — Land in Style">
   <meta property="og:description" content="Premium cotton travel sets. Designed for the journey.">
-  <link rel="icon" type="image/jpeg" href="./assets/favicon.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
@@ -29,6 +28,15 @@
     </div>
 
     <div class="nav-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="5"/>
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+        </svg>
+      </button>
       <button class="nav-btn" onclick="navigate('#cart')">
         Bag
         <span class="cart-badge" data-cart-count data-count="0">0</span>
@@ -46,6 +54,7 @@
   <a href="#shop">Shop</a>
   <a href="#cart">Bag</a>
   <a href="#about">About</a>
+  <a href="#" id="mobile-theme-toggle" style="font-size:1.2rem; color:var(--gold);">Switch Theme</a>
   <span class="mobile-menu-tagline">Land in Style</span>
 </nav>
 
@@ -156,8 +165,8 @@
   </section>
 
   <!-- Marquee strip -->
-  <div style="background:var(--gold); overflow:hidden; padding:10px 0; white-space:nowrap;">
-    <div style="display:inline-block; animation:marquee 20s linear infinite; font-size:0.62rem; font-weight:600; letter-spacing:0.25em; color:var(--bg); text-transform:uppercase;">
+  <div style="background:var(--marquee-bg); overflow:hidden; padding:10px 0; white-space:nowrap;">
+    <div style="display:inline-block; animation:marquee 20s linear infinite; font-size:0.62rem; font-weight:600; letter-spacing:0.25em; color:var(--marquee-text); text-transform:uppercase;">
       &nbsp;&nbsp;&nbsp;Premium Cotton · 320 GSM &nbsp;·&nbsp; Land in Style &nbsp;·&nbsp; Free Shipping Over $200 &nbsp;·&nbsp; Terminal · Runway · Departure · First Class &nbsp;·&nbsp; Premium Cotton · 320 GSM &nbsp;·&nbsp; Land in Style &nbsp;·&nbsp; Free Shipping Over $200 &nbsp;·&nbsp; Terminal · Runway · Departure · First Class &nbsp;·&nbsp; Premium Cotton · 320 GSM &nbsp;·&nbsp;
     </div>
     <style>@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }</style>
@@ -227,9 +236,9 @@
         <h2 class="display-md">Find Your Fit</h2>
       </div>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:2px; background:var(--border);">
-        <div class="fade-up delay-1" style="position:relative; overflow:hidden; aspect-ratio:4/3; cursor:pointer; background:#0D0D0D;" onclick="setFilter('gender','men'); navigate('#shop');">
+        <div class="fade-up delay-1" style="position:relative; overflow:hidden; aspect-ratio:4/3; cursor:pointer; background:var(--bg-elevated);" onclick="setFilter('gender','men'); navigate('#shop');">
           <img src="./assets/product-black-set.png" alt="Men's Collection" loading="lazy"
-            style="width:100%; height:100%; object-fit:cover; filter:brightness(0.5); transition:transform 0.7s var(--ease-out);"
+            style="width:100%; height:100%; object-fit:cover; filter:brightness(var(--img-brightness)); transition:transform 0.7s var(--ease-out);"
             onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
           <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
             <p class="label-sm" style="color:var(--gold); margin-bottom:0.5rem;">Terminal · Runway</p>
@@ -237,9 +246,9 @@
             <p style="font-size:0.72rem; color:var(--cream-dim); margin-top:0.5rem; letter-spacing:0.1em;">8 Styles</p>
           </div>
         </div>
-        <div class="fade-up delay-2" style="position:relative; overflow:hidden; aspect-ratio:4/3; cursor:pointer; background:#0D0D0D;" onclick="setFilter('gender','women'); navigate('#shop');">
+        <div class="fade-up delay-2" style="position:relative; overflow:hidden; aspect-ratio:4/3; cursor:pointer; background:var(--bg-elevated);" onclick="setFilter('gender','women'); navigate('#shop');">
           <img src="./assets/product-pink-set.png" alt="Women's Collection" loading="lazy"
-            style="width:100%; height:100%; object-fit:cover; filter:brightness(0.5); transition:transform 0.7s var(--ease-out);"
+            style="width:100%; height:100%; object-fit:cover; filter:brightness(var(--img-brightness)); transition:transform 0.7s var(--ease-out);"
             onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
           <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
             <p class="label-sm" style="color:var(--gold); margin-bottom:0.5rem;">Departure · First Class</p>
@@ -699,7 +708,7 @@
 
     <div class="about-hero">
       <img src="./assets/hero-airport.png" alt="AirportFits — Our Story" loading="lazy">
-      <div style="position:absolute; inset:0; background:rgba(10,10,10,0.4);"></div>
+      <div style="position:absolute; inset:0; background:var(--about-overlay);"></div>
       <div class="about-hero-content">
         <p class="label-sm fade-up" style="color:var(--gold); margin-bottom:1rem;">Our Story</p>
         <h1 class="fade-up delay-1">Born to<br><em style="font-style:italic; color:var(--gold-light);">Fly</em></h1>
@@ -755,7 +764,7 @@
     </div>
 
     <!-- Quote -->
-    <div style="padding:clamp(60px,8vh,100px) 0; border-top:1px solid var(--border); text-align:center; background:#0D0D0D;">
+    <div style="padding:clamp(60px,8vh,100px) 0; border-top:1px solid var(--border); text-align:center; background:var(--bg-elevated);">
       <div class="container">
         <span class="gold-line center fade-up"></span>
         <blockquote class="fade-up delay-1" style="font-family:var(--font-serif); font-size:clamp(1.4rem,3vw,2.5rem); font-weight:300; font-style:italic; line-height:1.4; color:var(--cream); max-width:700px; margin:0 auto 1.5rem;">

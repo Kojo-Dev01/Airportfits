@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initScrollAnimations();
   initNewsletterForm();
+  initThemeToggle();
   updateCartBadge();
 });
 
@@ -136,6 +137,30 @@ function initHeader() {
       header.classList.remove('scrolled');
     }
   }, { passive: true });
+}
+
+// ── THEME TOGGLE ────────────────────────────────────────
+let currentTheme = 'dark';
+
+function initThemeToggle() {
+  const btn = document.getElementById('theme-toggle');
+  const mobileBtn = document.getElementById('mobile-theme-toggle');
+
+  function toggleTheme(e) {
+    if (e) e.preventDefault();
+    currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    // Update mobile toggle text
+    if (mobileBtn) {
+      mobileBtn.textContent = currentTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+    }
+  }
+
+  if (btn) btn.addEventListener('click', toggleTheme);
+  if (mobileBtn) {
+    mobileBtn.addEventListener('click', toggleTheme);
+    mobileBtn.textContent = 'Light Mode';
+  }
 }
 
 // ── MOBILE MENU ───────────────────────────────────────────
